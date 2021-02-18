@@ -41,7 +41,7 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
           child: _widgetOptions.elementAt(_selectedIndex),
         ),
         bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Color(0xFFBDAED6),
+          backgroundColor: Color(0xDCBDBDBD),
           unselectedItemColor: Colors.black26,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
