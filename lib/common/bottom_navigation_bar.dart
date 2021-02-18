@@ -15,8 +15,7 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
   int _selectedIndex = 0;
   static List<Widget> _widgetOptions = <Widget>[
     Media(),
-    HistoricoDados(),
-    Container(),
+    HistoricoDados(), // Container(),
     HistoricoMedias(),
   ];
 
@@ -42,7 +41,7 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
           child: _widgetOptions.elementAt(_selectedIndex),
         ),
         bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Color(0xFF9162e4),
+          backgroundColor: Color(0xFFBDAED6),
           unselectedItemColor: Colors.black26,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
@@ -52,10 +51,10 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.data_usage_rounded),
                 label: 'Histórico de Dados'),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.bar_chart),
-              label: 'Gráficos',
-            ),
+            // BottomNavigationBarItem(
+            //   icon: Icon(Icons.bar_chart),
+            //   label: 'Gráficos',
+            // ),
             BottomNavigationBarItem(
               icon: Icon(Icons.history_rounded),
               label: 'Histórico de médias',

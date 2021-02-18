@@ -62,7 +62,7 @@ class _HistoricoMediasState extends State<HistoricoMedias> {
                                 Border.all(color: Colors.black54, width: 1)),
                         padding: EdgeInsets.all(8),
                         child: ListTile(
-                          leading: Icon(Icons.data_usage),
+                          leading: Icon(Icons.storage),
                           title: Text("Data: ${lista[index].data}"),
                           subtitle:
                               Text("Media registrada: ${lista[index].media}"),

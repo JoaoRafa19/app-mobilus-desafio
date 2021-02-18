@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:covid_status/common/logo.dart';
 import 'package:covid_status/screens/historicodados/data.dart';
 import 'package:flutter/material.dart';
