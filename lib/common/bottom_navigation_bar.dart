@@ -1,5 +1,6 @@
+import 'package:covid_status/screens/historico%20de%20medias/historico_medias.dart';
 import 'package:covid_status/screens/media/pagina_media_movel.dart';
-import 'package:covid_status/screens/medias_solicitadas/medias_solicitadas.dart';
+import 'package:covid_status/screens/historicodados/historicodados.dart';
 import 'package:flutter/material.dart';
 
 class CustomBottomNavigation extends StatefulWidget {
@@ -12,11 +13,11 @@ class CustomBottomNavigation extends StatefulWidget {
 /// This is the private State class that goes with MyStatefulWidget.
 class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static List<Widget> _widgetOptions = <Widget>[
     Media(),
-    MediasSolicitadas(),
+    HistoricoDados(),
+    Container(),
+    HistoricoMedias(),
   ];
 
   void _onItemTapped(int index) {
@@ -41,17 +42,24 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
           child: _widgetOptions.elementAt(_selectedIndex),
         ),
         bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Color(0xFF9162e4),
+          unselectedItemColor: Colors.black26,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.calculate),
+              icon: Icon(Icons.calculate_rounded),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.data_usage), label: 'Data'),
+                icon: Icon(Icons.data_usage_rounded),
+                label: 'Histórico de Dados'),
             BottomNavigationBarItem(
-              icon: Icon(Icons.stacked_line_chart),
-              label: 'Chart',
+              icon: Icon(Icons.bar_chart),
+              label: 'Gráficos',
             ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.history_rounded),
+              label: 'Histórico de médias',
+            )
           ],
           currentIndex: _selectedIndex,
           selectedItemColor: Colors.amber[800],
