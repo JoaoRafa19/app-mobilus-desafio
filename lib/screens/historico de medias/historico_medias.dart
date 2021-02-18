@@ -19,21 +19,35 @@ class _HistoricoMediasState extends State<HistoricoMedias> {
       message = false;
       onload = true;
     });
+    this.lista.clear();
     String url =
         'https://covid19status-7d37e-default-rtdb.firebaseio.com/medias.json';
     Response resp = await get(url);
 
     Map data = jsonDecode(resp.body);
-    List<MediaData> lista_ = List<MediaData>();
+    if (data == null) {
+      setState(() {
+        onload = false;
+        message = true;
+      });
+      return;
+    }
+    List<MediaData> listaAux = List<MediaData>();
 
     for (var key in data.keys) {
-      lista_.add(MediaData.fromJson(data[key]));
+      listaAux.add(MediaData.fromJson(data[key]));
     }
 
-    setState(() {
-      lista.addAll(lista_);
-      onload = false;
-    });
+    if (mounted)
+      setState(() {
+        lista.addAll(listaAux);
+        onload = false;
+      });
+  }
+
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => jsonRestApi());
   }
 
   @override

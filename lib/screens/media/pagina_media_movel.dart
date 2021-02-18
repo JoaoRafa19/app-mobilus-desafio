@@ -11,7 +11,7 @@ class Media extends StatefulWidget {
 }
 
 class _MediaState extends State<Media> {
-  Uri url = Uri.parse('https://covid19-api.org/api/timeline/BR');
+  Uri url = Uri.parse('https://covid-api-mobilus.herokuapp.com/covid/timeline');
 
   bool onload = false;
   String text = 'calcular';
@@ -24,30 +24,38 @@ class _MediaState extends State<Media> {
     var data = jsonDecode(response.body);
 
     List<Data> lista = List<Data>();
-
-    for (Map<String, dynamic> item in data) {
-      lista.add(Data.fromJson(item));
+    try {
+      for (Map<String, dynamic> item in data) {
+        lista.add(Data.fromJson(item));
+      }
+    } catch (e) {
+      return;
     }
     double aux = 0;
     for (var i = 0; i < 6; i++) {
       aux += (lista[i].deaths - lista[i + 1].deaths);
     }
     aux /= 6;
-
     //Save media to firebase
     Uri db = Uri.parse('https://covid-api-mobilus.herokuapp.com/savemedia');
     Map<String, String> header = {"Content-type": "application/json"};
-
-    
     String json =
-        '{"data": "${DateTime.now().toString().split(' ')[0]}", "media":"${aux.truncateToDouble()}"}';
+        '{"data": "${DateTime.now().toString().split('.')[0]}", "media":"${aux.truncateToDouble()}"}';
     Response resp = await post(db, headers: header, body: json);
-    
 
-    setState(() {
-      onload = false;
-      media = aux.truncateToDouble();
-    });
+    if (jsonDecode(resp.body)['error'] != null) {
+      if (mounted)
+        setState(() {
+          onload = false;
+          media = 0.0;
+        });
+      return;
+    }
+    if (mounted)
+      setState(() {
+        onload = false;
+        media = aux.truncateToDouble();
+      });
   }
 
   @override

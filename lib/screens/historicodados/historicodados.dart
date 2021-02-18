@@ -9,7 +9,7 @@ class HistoricoDados extends StatefulWidget {
 }
 
 class _HistoricoDadosState extends State<HistoricoDados> {
-  Uri url = Uri.parse('https://covid19-api.org/api/timeline/BR');
+  Uri url = Uri.parse('https://covid-api-mobilus.herokuapp.com/covid/timeline');
   bool onload = false;
   List<Data> lista = [];
   bool message = true;
@@ -20,19 +20,26 @@ class _HistoricoDadosState extends State<HistoricoDados> {
       onload = true;
       message = false;
     });
+    this.lista.clear();
     Response response = await get(this.url);
     List data = jsonDecode(response.body);
 
-    List<Data> lista_ = List<Data>();
+    List<Data> lista = List<Data>();
 
     for (Map<String, dynamic> item in data) {
-      lista_.add(Data.fromJson(item));
+      lista.add(Data.fromJson(item));
     }
 
-    setState(() {
-      this.lista.addAll(lista_);
-      onload = false;
-    });
+    if (mounted)
+      setState(() {
+        this.lista.addAll(lista);
+        onload = false;
+      });
+  }
+
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => jsonRestApi());
   }
 
   @override

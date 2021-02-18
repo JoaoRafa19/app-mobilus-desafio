@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class Data {
   String lastupdate;
   int cases = 0;
