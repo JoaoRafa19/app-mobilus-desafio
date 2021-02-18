@@ -11,9 +11,6 @@ class Data {
     recovered = jsonData['recovered'] as int;
   }
   
-  double media(List<Data> lista) {
-  return 0.0;
-  }
 }
 
 
